@@ -1,0 +1,28 @@
+The settings below are for version 2.0.2 SDL. If you follow the video it will show you how to set the 
+directories correctly.This is just a reference of what needs to be where.
+
+Settings:
+Under settingsLinker settings
+-lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+
+Under: settings>Search directories>Compiler
+C:\SDL\SDL2-2.0.2\i686-w64-mingw32\include\SDL2
+C:\SDL\SDL2_image-2.0.0\i686-w64-mingw32\include\SDL2
+
+Under: settings>Search directories>Linker
+C:\SDL\SDL2-2.0.2\i686-w64-mingw32\lib
+C:\SDL\SDL2_image-2.0.0\i686-w64-mingw32\lib
+
+My includes are
+#include <SDL.h>
+#include <SDL_image.h>
+
+if you change 
+C:\SDL\SDL2-2.0.2\i686-w64-mingw32\include\SDL2
+C:\SDL\SDL2_image-2.0.0\i686-w64-mingw32\include\SDL2
+to
+C:\SDL\SDL2-2.0.2\i686-w64-mingw32\include
+C:\SDL\SDL2_image-2.0.0\i686-w64-mingw32\include
+the include would need to be changed to
+#include<SDL2/SDL.h>
+#include<SDL2/SDL_image.h>
