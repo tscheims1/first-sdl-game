@@ -1,8 +1,11 @@
 #ifndef __GAME_H__
 #define __GAME_H__
-#include "sprite.h"
-#include "texture.h"
-
+#include "Sprite.h"
+#include "Texture.h"
+#include "Fighter.h"
+#include "Background.h"
+#include "Utils/Rectangle.h"
+#include "Enemy.h"
 #include <SDL2/SDL.h>
 #include <string>
 #include <vector>
@@ -18,7 +21,16 @@ class Game
 		SDL_Renderer *renderer;
 		int screenResolutionX;
 		int screenResolutionY;
-		std::vector<Texture*> textures;
+		Fighter *fighter;
+		Background *background;
+		std::vector<Texture*> enemies;
+		
+		/*
+		 * initialize all necessary game objects
+		 */
+		void init();
+		void checkCollision();
+		
 	public:
 		/**
 		 * Constructor
@@ -32,6 +44,10 @@ class Game
 		void loop();
 		
 		
+		/**
+		 * A Gameunit
+		 */
+		static const int UNIT = 20;	
 	
 };
 #endif

@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o game.o Sprite.o Texture.o SDLHelper.o
-LINKOBJ  = main.o game.o Sprite.o Texture.o SDLHelper.o
+OBJ      = main.o game.o Sprite.o Texture.o SDLHelper.o Fighter.o Background.o Enemy.o utils/Rectangle.o
+LINKOBJ  = main.o game.o Sprite.o Texture.o SDLHelper.o Fighter.o Background.o Enemy.o utils/Rectangle.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc  -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
@@ -38,3 +38,15 @@ Texture.o: Texture.cpp
 
 SDLHelper.o: SDLHelper.cpp
 	$(CPP) -c SDLHelper.cpp -o SDLHelper.o $(CXXFLAGS)
+
+Fighter.o: Fighter.cpp
+	$(CPP) -c Fighter.cpp -o Fighter.o $(CXXFLAGS)
+
+Background.o: Background.cpp
+	$(CPP) -c Background.cpp -o Background.o $(CXXFLAGS)
+
+Enemy.o: Enemy.cpp
+	$(CPP) -c Enemy.cpp -o Enemy.o $(CXXFLAGS)
+
+utils/Rectangle.o: utils/Rectangle.cpp
+	$(CPP) -c utils/Rectangle.cpp -o utils/Rectangle.o $(CXXFLAGS)

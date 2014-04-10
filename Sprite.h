@@ -1,7 +1,7 @@
 #ifndef __SPRITE_H__
 #define __SPRITE_H__
 #include <string>
-
+#include "Utils/Rectangle.h"
 /**
  * This class represents a single sprite
  */ 
@@ -13,6 +13,8 @@ class Sprite
 		int width;
 		int height;
 		bool alive;
+		Utils::Rectangle boundingBox;
+		
 	
 	public:
 		Sprite(int posX,int posY,int width,int height);
@@ -22,6 +24,8 @@ class Sprite
 		void translate(int x, int y);
 		int getX();
 		int getY();
+		Utils::Rectangle* getBoundingBox();
+		bool checkCollision(Sprite *t);
 		
 		
 		

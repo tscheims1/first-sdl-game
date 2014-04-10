@@ -1,7 +1,7 @@
 #include "sprite.h"
 
 
-Sprite::Sprite(int posX,int posY,int width,int height)
+Sprite::Sprite(int posX,int posY,int width,int height) : 	boundingBox(posX,posY,width,height)
 {
 	this->posX = posX;
 	this->posY = posY;
@@ -26,6 +26,7 @@ void Sprite::translate(int x, int y)
  {
  	this->posX += x;
  	this->posY += y;
+ 	this->boundingBox.translate(x,y);
  }
  int Sprite::getX()
  {
@@ -35,4 +36,12 @@ void Sprite::translate(int x, int y)
  {
  	return this->posY;
  }
- 
+ Utils::Rectangle* Sprite::getBoundingBox()
+{
+	return &this->boundingBox;
+}
+bool Sprite::checkCollision(Sprite *r)
+{
+	
+	return this->boundingBox.intersectsObject((*r->getBoundingBox()));
+}

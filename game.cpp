@@ -47,10 +47,33 @@ Game::Game(char **argv,int argc)
 		std::cout<< SDL_GetError();
 		exit(1);
 	}
-	
+	this->init();
 		
 	
 	
+}
+void Game::init()
+{
+	for(int i = 0; i < 10; i++)
+	{
+			
+		enemies.push_back(new Enemy(50*i,70*i,40,30,SDLHelper::loadTexture("Hamster_in_hand_klein.jpg",this->renderer)));
+	
+	}
+	fighter = new Fighter(this->screenResolutionX/2,this->screenResolutionY/2,40,30,SDLHelper::loadTexture("Hamster_in_hand_klein.jpg",this->renderer));
+}
+
+void Game::checkCollision()
+{
+	
+	for(int i = 0; i < this->enemies.size();i++)
+	{
+		bool col = this->fighter->checkCollision(this->enemies[i]);
+		if( this->fighter->checkCollision(this->enemies[i]))
+		{
+			std::cout << "Collision detected";
+		}
+	}
 }
 /**
  * Release all memory
@@ -70,6 +93,9 @@ void Game::loop()
 {
 	SDL_Event event;
 	bool quit = false;
+	
+	
+	
 	while(!quit)
 	{
 		SDL_Delay(20);
@@ -79,13 +105,27 @@ void Game::loop()
 			{
 				quit = true;
 			}
+			
+			/*
+			 * Keyboardinput
+			 */
 			if(event.type == SDL_KEYDOWN)
 			{
-				for(int i = 0; i < 10; i++)
+				switch(event.key.keysym.sym)
 				{
-						
-					textures.push_back(new Texture(50*i,70*i,1,1,SDLHelper::loadTexture("Hamster_in_hand_klein.jpg",this->renderer)));
-				
+
+					case SDLK_DOWN:
+						fighter->translate(0,Game::UNIT);	
+						break;
+					case SDLK_UP:
+						fighter->translate(0,-Game::UNIT);
+						break;
+					case SDLK_LEFT:
+						fighter->translate(-Game::UNIT,0);
+						break;
+					case SDLK_RIGHT:
+						fighter->translate(Game::UNIT,0);
+						break;
 				}
 				
 				SDL_Texture *texture = SDLHelper::loadTexture("Hamster_in_hand1.jpg",this->renderer);
@@ -95,10 +135,11 @@ void Game::loop()
 				SDL_RenderClear(renderer);
 				
 				SDLHelper::renderTexture(texture,renderer,60,60);
-				for(int i = 0; i < textures.size();i++)
+				for(int i = 0; i < enemies.size();i++)
 				{
-					SDLHelper::renderTexture(textures[i]->getTexture(),renderer,textures[i]->getX(),textures[i]->getY());
+					SDLHelper::renderTexture(enemies[i]->getTexture(),renderer,enemies[i]->getX(),enemies[i]->getY());
 				}
+				SDLHelper::renderTexture(fighter->getTexture(),renderer,fighter->getX(),fighter->getY());
 				SDL_RenderPresent(renderer);
 				
 			}
@@ -106,6 +147,8 @@ void Game::loop()
 			{
 				
 			}
+			
+			this->checkCollision();
 		}
 	}
 }
