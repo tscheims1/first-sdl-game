@@ -18,7 +18,9 @@ class Texture :public Sprite
 	public:
 		SDL_Texture* getTexture();
 		Texture(int posX,int posY,int width, int height,SDL_Texture *texture);
-		
+		void collision(Sprite *s);
+		~Texture();
+				
 	
 		
 };

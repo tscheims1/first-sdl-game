@@ -30,7 +30,7 @@ Game::Game(char **argv,int argc)
 	 * Init SDL_IMAGE
 	 */
 	IMG_Init(IMG_INIT_JPG);
-	win = SDL_CreateWindow("Hello World",50,50,screenResolutionX,screenResolutionY, SDL_WINDOW_SHOWN);
+	win = SDL_CreateWindow("Shot 'em up'",50,50,screenResolutionX,screenResolutionY, SDL_WINDOW_SHOWN);
 	if(win == 0)
 	{
 		std::cout << SDL_GetError();
@@ -61,8 +61,11 @@ void Game::init()
 	
 	}
 	fighter = new Fighter(this->screenResolutionX/2,this->screenResolutionY/2,40,30,SDLHelper::loadTexture("Hamster_in_hand_klein.jpg",this->renderer));
+	shotTexture = SDLHelper::loadTexture("shot.jpg",this->renderer);
 }
-
+/**
+ * This method checks all Collisions
+ */
 void Game::checkCollision()
 {
 	
@@ -81,8 +84,22 @@ void Game::checkCollision()
  */
 Game::~Game()
 {
+	
+	/*
+	 * TODO: Tidy up all textures.
+	 */
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->win);
+	delete fighter;
+	for(int i = 0; i < enemies.size();i++)
+		delete enemies[i];
+	
+	for(int i = 0; i < fightersShots.size(); i++ )
+		delete fightersShots[i];
+//	delete background;
+	SDL_DestroyTexture(this->shotTexture);
+	
+	
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -126,18 +143,27 @@ void Game::loop()
 					case SDLK_RIGHT:
 						fighter->translate(Game::UNIT,0);
 						break;
+					case SDLK_SPACE:
+						fightersShots.push_back(fighter->fire(shotTexture));
+						break;
 				}
 				
 				SDL_Texture *texture = SDLHelper::loadTexture("Hamster_in_hand1.jpg",this->renderer);
 				
 				
-				
+				/*
+				 * Render all objects
+				 */
 				SDL_RenderClear(renderer);
 				
 				SDLHelper::renderTexture(texture,renderer,60,60);
 				for(int i = 0; i < enemies.size();i++)
 				{
 					SDLHelper::renderTexture(enemies[i]->getTexture(),renderer,enemies[i]->getX(),enemies[i]->getY());
+				}
+				for(int i = 0; i < fightersShots.size();i++)
+				{
+					SDLHelper::renderTexture(fightersShots[i]->getTexture(),renderer,fightersShots[i]->getX(),fightersShots[i]->getY());
 				}
 				SDLHelper::renderTexture(fighter->getTexture(),renderer,fighter->getX(),fighter->getY());
 				SDL_RenderPresent(renderer);
@@ -152,7 +178,4 @@ void Game::loop()
 		}
 	}
 }
-
-
-
 

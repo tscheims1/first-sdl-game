@@ -3,3 +3,8 @@ Enemy::Enemy(int posX,int posY,int width, int height,SDL_Texture *texture) :Text
 {
 	
 }
+void Enemy::collision(Sprite *s)
+{
+	this->destroy();
+	
+}

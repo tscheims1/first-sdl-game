@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=17
+UnitCount=19
 
 [VersionInfo]
 Major=1
@@ -214,6 +214,26 @@ BuildCmd=
 FileName=utils\Rectangle.cpp
 CompileCpp=1
 Folder=TestSDL2
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit18]
+FileName=Shot.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit19]
+FileName=Shot.h
+CompileCpp=1
+Folder=
 Compile=1
 Link=1
 Priority=1000

@@ -3,6 +3,9 @@
 #include <iostream>
 namespace Utils
 {
+	/*
+	 * Represents a rectangle
+	 */
 	class Rectangle
 	{
 		private:

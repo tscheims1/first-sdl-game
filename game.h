@@ -1,11 +1,13 @@
 #ifndef __GAME_H__
 #define __GAME_H__
+
 #include "Sprite.h"
 #include "Texture.h"
 #include "Fighter.h"
 #include "Background.h"
 #include "Utils/Rectangle.h"
 #include "Enemy.h"
+#include "Shot.h"
 #include <SDL2/SDL.h>
 #include <string>
 #include <vector>
@@ -19,9 +21,11 @@ class Game
 	private:
 		SDL_Window *win;
 		SDL_Renderer *renderer;
+		SDL_Texture *shotTexture;
 		int screenResolutionX;
 		int screenResolutionY;
 		Fighter *fighter;
+		std::vector<Shot*> fightersShots;
 		Background *background;
 		std::vector<Texture*> enemies;
 		

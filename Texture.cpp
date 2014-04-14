@@ -5,9 +5,17 @@ Texture::Texture(int posX,int posY,int width, int height,SDL_Texture *texture) :
 	this->texture = texture;
 
 }
+Texture::~Texture()
+{
+	
+}
 SDL_Texture* Texture::getTexture()
 {
 	return this->texture;
+}
+void Texture::collision(Sprite *)
+{
+	
 }
 
 

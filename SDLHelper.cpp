@@ -1,5 +1,9 @@
 #include "SDLHelper.h"
 
+/**
+ * Loads a SDL Texture and return a pöinter 
+   to this texture
+  */
  SDL_Texture* SDLHelper::loadTexture(std::string file, SDL_Renderer *renderer){
 	//Initialize to nullptr to avoid dangling pointer issues
 	SDL_Texture *texture = 0;
@@ -17,7 +21,10 @@
 		std::cout << "SDL Error" << SDL_GetError();
 
 	return texture;
-}	
+}
+/**
+ *	render a texture with the given renderer
+ */
 void SDLHelper::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y){
 	//Setup the destination rectangle to be at the position we want
 	SDL_Rect dst;

@@ -4,6 +4,8 @@
 #include "Utils/Rectangle.h"
 /**
  * This class represents a single sprite
+ * This class doesn't have dependencies to 
+ * a specific Graphic Library
  */ 
 class Sprite
 {

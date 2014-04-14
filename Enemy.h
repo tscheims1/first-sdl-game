@@ -6,5 +6,6 @@ class Enemy : public Texture
 {
 	public:
 		Enemy(int posX,int posY,int width, int height,SDL_Texture *texture);
+		 void collision(Sprite *s);
 };
 #endif

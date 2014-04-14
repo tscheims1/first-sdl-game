@@ -1,6 +1,10 @@
 #include "Rectangle.h"
 using namespace Utils;
 
+
+/**
+ * represents a rectagle
+ */
 Rectangle::Rectangle(int posX,int posY,int width,int height)
 {
 	this->posX = posX;

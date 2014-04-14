@@ -1,5 +1,5 @@
 #include "sprite.h"
-
+#include "Shot.h"
 
 Sprite::Sprite(int posX,int posY,int width,int height) : 	boundingBox(posX,posY,width,height)
 {
