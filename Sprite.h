@@ -2,6 +2,7 @@
 #define __SPRITE_H__
 #include <string>
 #include "Utils/Rectangle.h"
+#include "Utils/Vector.h"
 /**
  * This class represents a single sprite
  * This class doesn't have dependencies to 
@@ -16,7 +17,7 @@ class Sprite
 		int height;
 		bool alive;
 		Utils::Rectangle boundingBox;
-		
+		Utils::Vector directionVector;
 	
 	public:
 		Sprite(int posX,int posY,int width,int height);
@@ -28,6 +29,7 @@ class Sprite
 		int getY();
 		Utils::Rectangle* getBoundingBox();
 		bool checkCollision(Sprite *t);
+		void move();
 		
 		
 		

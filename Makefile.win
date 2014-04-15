@@ -1,17 +1,17 @@
 # Project: TestSDL2
 # Makefile created by Dev-C++ 5.6.2
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o game.o Sprite.o Texture.o SDLHelper.o Fighter.o Background.o Enemy.o utils/Rectangle.o Shot.o
-LINKOBJ  = main.o game.o Sprite.o Texture.o SDLHelper.o Fighter.o Background.o Enemy.o utils/Rectangle.o Shot.o
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc  -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+OBJ      = main.o game.o Sprite.o Texture.o SDLHelper.o Fighter.o Background.o Enemy.o utils/Rectangle.o Shot.o utils/Vector.o InputHandler.o
+LINKOBJ  = main.o game.o Sprite.o Texture.o SDLHelper.o Fighter.o Background.o Enemy.o utils/Rectangle.o Shot.o utils/Vector.o InputHandler.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc  -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -pg -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
 BIN      = TestSDL2.exe
-CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) 
+CXXFLAGS = $(CXXINCS) -pg -g3
+CFLAGS   = $(INCS) -pg -g3
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -53,3 +53,9 @@ utils/Rectangle.o: utils/Rectangle.cpp
 
 Shot.o: Shot.cpp
 	$(CPP) -c Shot.cpp -o Shot.o $(CXXFLAGS)
+
+utils/Vector.o: utils/Vector.cpp
+	$(CPP) -c utils/Vector.cpp -o utils/Vector.o $(CXXFLAGS)
+
+InputHandler.o: InputHandler.cpp
+	$(CPP) -c InputHandler.cpp -o InputHandler.o $(CXXFLAGS)

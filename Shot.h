@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Fighter.h"
 
+
 class Fighter;
 class Shot : public Texture
 {

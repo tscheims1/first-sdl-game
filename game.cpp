@@ -15,7 +15,7 @@
  * @param char** argv
  * @param int argc
  */
-Game::Game(char **argv,int argc)
+Game::Game(char **argv,int argc) :inputHandler()
 {
 	screenResolutionX = 800;
 	screenResolutionY = 600;
@@ -111,22 +111,46 @@ void Game::loop()
 	SDL_Event event;
 	bool quit = false;
 	
+	float timeNow = 0.0;
+	float deltaTime = 0.0;
+	float lastTime =0.0;
 	
+	int delay = 1000/Game::MAX_FRAME_PER_SEC;
+	SDL_Texture *texture = SDLHelper::loadTexture("Hamster_in_hand1.jpg",this->renderer);
 	
 	while(!quit)
 	{
-		SDL_Delay(20);
+	
+		timeNow = SDL_GetTicks();
+			int ticksNow = SDL_GetTicks();
+			int ticksPrev = ticksNow;
+		
 		while(SDL_PollEvent(&event))
 		{
 			if(event.type ==SDL_QUIT)
 			{
 				quit = true;
 			}
+			inputHandler.input(event);
 			
+			
+			
+			
+			
+			if(inputHandler.keyMap[inputHandler.LEFT] == true)
+				fighter->translate(-Game::UNIT,0);
+			if(inputHandler.keyMap[inputHandler.RIGHT] == true)
+				fighter->translate(Game::UNIT,0);
+			if(inputHandler.keyMap[inputHandler.UP] == true)
+				fighter->translate(0,-Game::UNIT);
+			if(inputHandler.keyMap[inputHandler.DOWN] == true)
+				fighter->translate(0,Game::UNIT);
+			if(inputHandler.keyMap[inputHandler.FIRE1] == true)
+				fightersShots.push_back(fighter->fire(shotTexture));
 			/*
 			 * Keyboardinput
 			 */
-			if(event.type == SDL_KEYDOWN)
+			/*if(event.type == SDL_KEYDOWN)
 			{
 				switch(event.key.keysym.sym)
 				{
@@ -146,9 +170,34 @@ void Game::loop()
 					case SDLK_SPACE:
 						fightersShots.push_back(fighter->fire(shotTexture));
 						break;
+						
+					default:
+						break;
 				}
 				
-				SDL_Texture *texture = SDLHelper::loadTexture("Hamster_in_hand1.jpg",this->renderer);
+			
+			}
+			if(event.type == SDL_MOUSEBUTTONDOWN)
+			{
+				
+			}*/
+			
+			
+		
+		}
+		
+				
+				/*
+				 * move all objects
+				*/
+				for(int i = 0; i < fightersShots.size();i++)
+				{
+					fightersShots[i]->move();
+				}
+				/**
+				 *check collision
+				 */	
+				this->checkCollision();
 				
 				
 				/*
@@ -168,14 +217,13 @@ void Game::loop()
 				SDLHelper::renderTexture(fighter->getTexture(),renderer,fighter->getX(),fighter->getY());
 				SDL_RenderPresent(renderer);
 				
-			}
-			if(event.type == SDL_MOUSEBUTTONDOWN)
-			{
+				ticksNow = SDL_GetTicks();
+				if(ticksNow - ticksPrev < delay)
+				{
+					//std::cout << "quick frame";
+					SDL_Delay(delay -(ticksNow-ticksPrev));
+				}
 				
-			}
-			
-			this->checkCollision();
-		}
 	}
 }
 

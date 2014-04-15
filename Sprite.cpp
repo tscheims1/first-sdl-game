@@ -45,3 +45,8 @@ bool Sprite::checkCollision(Sprite *r)
 	
 	return this->boundingBox.intersectsObject((*r->getBoundingBox()));
 }
+void Sprite::move()
+{
+	this->posX += this->directionVector.getX();
+	this->posY += this->directionVector.getY();
+}
